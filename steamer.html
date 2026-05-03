@@ -472,8 +472,9 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
     <div class="ftit">اطلبي <em>دلوقتي</em> 💨</div>
     <div class="fsub2">أدخلي بياناتك وهيتواصل معاكِ فريقنا خلال ساعات</div>
     <div id="orderForm">
-      <div class="fg"><label class="fl">الاسم الكامل *</label><input type="text" id="fn" class="fin" placeholder="اكتبي اسمك" autocomplete="name"></div>
+      <div class="fg"><label class="fl">الاسم الكامل *</label><input type="text" id="fn" class="fin" placeholder="اكتب اسمك" autocomplete="name"></div>
       <div class="fg"><label class="fl">رقم الموبايل *</label><input type="tel" id="fp" class="fin" placeholder="01xxxxxxxxx" style="direction:ltr;text-align:right" autocomplete="tel"></div>
+      <div class="fg"><label class="fl">رقم بديل (اختياري) 📞</label><input type="tel" id="fp2" class="fin" placeholder="01xxxxxxxxx — لضمان التواصل" style="direction:ltr;text-align:right"></div>
       <div class="fg">
         <label class="fl">المحافظة *</label>
         <select id="fa" class="fin">
@@ -489,6 +490,16 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
         </select>
       </div>
       <div class="fg"><label class="fl">العنوان</label><input type="text" id="fad" class="fin" placeholder="الشارع، الحي، رقم العمارة"></div>
+      <div class="fg">
+        <label class="fl">وقت التوصيل المناسب ⏰</label>
+        <select id="ft" class="fin">
+          <option value="any">أي وقت مناسب</option>
+          <option value="morning">الصبح (9 ص - 1 م)</option>
+          <option value="afternoon">بعد الظهر (1 م - 5 م)</option>
+          <option value="evening">المساء (5 م - 9 م)</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">ملاحظة للمندوب (اختياري) 📝</label><input type="text" id="fnote2" class="fin" placeholder="مثال: اتصل قبل ما تيجي"></div>
       <div class="fg">
         <label class="fl">الكمية</label>
         <select id="fq" class="fin">
@@ -553,7 +564,10 @@ function sub(){
   const n=document.getElementById('fn').value.trim(),p=document.getElementById('fp').value.trim(),a=document.getElementById('fa').value;
   if(!n||!p||!a){alert('من فضلك أكملي البيانات المطلوبة!');return;}
   if(typeof fbq!=='undefined'){fbq('track','Lead',{content_name:'Steamer Egypt',value:selPrice,currency:'EGP'});fbq('track','AddToCart',{value:selPrice,currency:'EGP'});}
-  fetch('https://script.google.com/macros/s/AKfycbwwvJJWm4IeULo8EZrYh5j7ByyBosl_FjgboRBKwYzgrH5H_Bs_H7tIC-yjECiyQ-zk/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({timestamp:new Date().toLocaleString('ar-EG'),name:n,phone:p,gov:a,address:document.getElementById('fad').value,qty:document.getElementById('fq').value,price:selPrice+'EGP',product:'مكواة البخار المحمولة'})});
+  const p2=document.getElementById('fp2').value.trim();
+  const ft=document.getElementById('ft').value;
+  const fnote2=document.getElementById('fnote2').value.trim();
+  fetch('https://script.google.com/macros/s/AKfycbwwvJJWm4IeULo8EZrYh5j7ByyBosl_FjgboRBKwYzgrH5H_Bs_H7tIC-yjECiyQ-zk/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({timestamp:new Date().toLocaleString('ar-EG'),name:n,phone:p,phone2:p2,gov:a,address:document.getElementById('fad').value,delivery_time:ft,note:fnote2,qty:document.getElementById('fq').value,price:selPrice+'EGP',product:'مكواة البخار المحمولة'})});
   const params=new URLSearchParams({name:n,phone:p,gov:a,price:selPrice,product:'مكواة بخار'});
   setTimeout(()=>{window.location.href='upsell_steamer.html?'+params.toString();},500);
 }
