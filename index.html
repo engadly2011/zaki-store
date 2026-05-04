@@ -810,7 +810,7 @@ function selQ(el,q,p){
   updatePayPrices();
 }
 
-function goOrder(){document.getElementById('order').scrollIntoView({behavior:'smooth'});}
+function goOrder(){const el=document.getElementById('order');if(el)el.scrollIntoView({behavior:'smooth'});setTimeout(()=>{const pay=document.getElementById('pay_cod');if(pay)pay.scrollIntoView({behavior:'smooth',block:'center'});},400);}
 
 window.addEventListener('scroll',()=>{
   document.getElementById('sticky').classList.toggle('vis',window.scrollY>document.querySelector('.hero').offsetHeight);
