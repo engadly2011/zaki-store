@@ -287,7 +287,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
     <div class="exit-title">انتظر! <span class="exit-hl">خصم 15%!</span></div>
     <div class="exit-desc">قبل ما تمشي — خد كود خصم خاص ليك دلوقتي!</div>
     <div class="exit-code"><div class="exit-code-l">كود الخصم</div><div class="exit-code-v">ZAKI15</div></div>
-    <button class="exit-cta" onclick="closeExit()">✅ هخد الخصم وأطلب دلوقتي</button>
+    <button class="exit-cta" onclick="closeExit();goOrder()">✅ هخد الخصم وأطلب دلوقتي</button>
     <div class="exit-skip" onclick="closeExit()">لأ شكراً</div>
   </div>
 </div>
@@ -398,7 +398,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
     </div>
   </div>
 
-  <a href="#order" class="cta">🛒 اطلب دلوقتي — الدفع عند الاستلام</a>
+  <a href="javascript:void(0)" onclick="goOrder()" class="cta">🛒 اطلب دلوقتي — اختر طريقة الدفع</a>
   <div class="cta-sub"><span>✓ شحن مجاني</span> | <span>✓ ضمان 100%</span> | <span>✓ إرجاع مجاني</span></div>
   <div class="pay-row">
     <div class="pay-item">💵 كاش عند الاستلام + 85 ج.م شحن</div>
@@ -591,7 +591,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
 <div class="fsec" id="order">
   <div class="fwrap">
     <div class="ftit">اطلب <em>دلوقتي</em> ❄️</div>
-    <div class="fsub2">أدخل بياناتك وهيتواصل معاك فريقنا خلال ساعات</div>
+    <div class="fsub2" id="formStart">أدخل بياناتك وهيتواصل معاك فريقنا خلال ساعات</div>
 
     <!-- PAYMENT METHOD SELECTOR -->
     <div style="margin-bottom:24px">
@@ -810,7 +810,11 @@ function selQ(el,q,p){
   updatePayPrices();
 }
 
-function goOrder(){const el=document.getElementById('order');if(el)el.scrollIntoView({behavior:'smooth'});setTimeout(()=>{const pay=document.getElementById('pay_cod');if(pay)pay.scrollIntoView({behavior:'smooth',block:'center'});},400);}
+function goOrder(){
+  const el=document.getElementById('formStart');
+  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}
+  else{const o=document.getElementById('order');if(o)o.scrollIntoView({behavior:'smooth'});}
+}
 
 window.addEventListener('scroll',()=>{
   document.getElementById('sticky').classList.toggle('vis',window.scrollY>document.querySelector('.hero').offsetHeight);
