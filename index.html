@@ -368,11 +368,11 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
       <div class="pnow">450 <span style="font-size:16px">ج.م</span></div>
       <div><span class="pold">695 ج.م</span> <span class="psave">35% خصم</span></div>
     </div>
-    <div class="pship">✓ شحن مجاني لكل محافظات مصر</div>
+    <div class="pship">✓ توصيل لكل محافظات مصر خلال 3-5 أيام</div>
     <div class="pperks">
-      <span class="pperk">💰 دفع عند الاستلام</span>
+      <span class="pperk">💵 دفع عند الاستلام</span>
+      <span class="pperk">🏦 تحويل = شحن مجاني</span>
       <span class="pperk">🔄 إرجاع مجاني</span>
-      <span class="pperk">❄️ حرارة وتبريد</span>
     </div>
   </div>
 
@@ -401,9 +401,8 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
   <a href="#order" class="cta">🛒 اطلب دلوقتي — الدفع عند الاستلام</a>
   <div class="cta-sub"><span>✓ شحن مجاني</span> | <span>✓ ضمان 100%</span> | <span>✓ إرجاع مجاني</span></div>
   <div class="pay-row">
-    <div class="pay-item">💳 فودافون كاش</div>
-    <div class="pay-item">💵 كاش عند الاستلام</div>
-    <div class="pay-item">🔒 آمن 100%</div>
+    <div class="pay-item">💵 كاش عند الاستلام + 85 ج.م شحن</div>
+    <div class="pay-item">🏦 تحويل = شحن مجاني 🎁</div>
   </div>
 </div>
 
@@ -593,7 +592,139 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding
   <div class="fwrap">
     <div class="ftit">اطلب <em>دلوقتي</em> ❄️</div>
     <div class="fsub2">أدخل بياناتك وهيتواصل معاك فريقنا خلال ساعات</div>
-    <div id="orderForm">
+
+    <!-- PAYMENT METHOD SELECTOR -->
+    <div style="margin-bottom:24px">
+
+      <!-- Section Title -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <div style="height:1px;flex:1;background:rgba(255,255,255,.08)"></div>
+        <div style="font-size:12px;font-weight:700;color:var(--gr2);letter-spacing:1px;white-space:nowrap">اختر طريقة الدفع</div>
+        <div style="height:1px;flex:1;background:rgba(255,255,255,.08)"></div>
+      </div>
+
+      <!-- COD Option -->
+      <div id="pay_cod" onclick="selectPay('cod')" style="border:2px solid var(--blu);background:rgba(30,111,255,.06);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blu),var(--blu2))"></div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <!-- Radio -->
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--blu);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 3px rgba(30,111,255,.2)">
+            <div style="width:8px;height:8px;background:#fff;border-radius:50%"></div>
+          </div>
+          <!-- Content -->
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+              <div style="font-size:14px;font-weight:900;color:var(--w)">💵 الدفع عند الاستلام</div>
+              <div style="font-size:11px;background:rgba(30,111,255,.15);color:var(--blu2);padding:3px 8px;border-radius:8px;font-weight:700">الأكثر طلباً</div>
+            </div>
+            <div style="font-size:12px;color:var(--gr2)">ادفع لما الطلب يوصل لبيتك</div>
+          </div>
+        </div>
+        <!-- Price breakdown -->
+        <div style="margin-top:12px;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:11px;color:var(--gr)">سعر المنتج</div>
+            <div style="font-size:13px;font-weight:700;color:var(--w)" id="cod_product_price">450 ج.م</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2)">+</div>
+          <div>
+            <div style="font-size:11px;color:var(--gr)">رسوم الشحن</div>
+            <div style="font-size:13px;font-weight:700;color:var(--re)">85 ج.م</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2)">=</div>
+          <div>
+            <div style="font-size:11px;color:var(--gr)">الإجمالي</div>
+            <div style="font-size:15px;font-weight:900;color:var(--blu2)" id="cod_price">535 ج.م</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSFER Option -->
+      <div id="pay_transfer" onclick="selectPay('transfer')" style="border:1.5px solid rgba(255,255,255,.08);background:var(--dk3);border-radius:16px;padding:16px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;gap:12px">
+          <!-- Radio -->
+          <div id="transfer_radio" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--gr);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s">
+          </div>
+          <!-- Content -->
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+              <div style="font-size:14px;font-weight:900;color:var(--w)">🏦 تحويل / فودافون كاش</div>
+              <div style="font-size:11px;background:rgba(0,212,106,.15);color:var(--gn);padding:3px 8px;border-radius:8px;font-weight:700">🎁 شحن مجاني</div>
+            </div>
+            <div style="font-size:12px;color:var(--gn);font-weight:600">وفّر 85 ج.م على الشحن!</div>
+          </div>
+        </div>
+
+        <!-- Price breakdown -->
+        <div style="margin-top:12px;background:rgba(0,0,0,.2);border-radius:10px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:11px;color:var(--gr)">سعر المنتج</div>
+            <div style="font-size:13px;font-weight:700;color:var(--w)" id="transfer_price">450 ج.م</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2)">+</div>
+          <div>
+            <div style="font-size:11px;color:var(--gr)">رسوم الشحن</div>
+            <div style="font-size:13px;font-weight:700;color:var(--gn)">مجاني 🎁</div>
+          </div>
+          <div style="font-size:16px;color:rgba(255,255,255,.2)">=</div>
+          <div>
+            <div style="font-size:11px;color:var(--gr)">الإجمالي</div>
+            <div style="font-size:15px;font-weight:900;color:var(--gn)" id="transfer_total">450 ج.م</div>
+          </div>
+        </div>
+
+        <!-- Transfer Details - hidden until selected -->
+        <div id="transfer_details" style="display:none;margin-top:12px;border-top:1px solid rgba(0,212,106,.15);padding-top:12px">
+          <div style="font-size:12px;font-weight:700;color:var(--gn);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+            <span>📲</span> بيانات التحويل
+          </div>
+
+          <!-- Account details card -->
+          <div style="background:rgba(0,212,106,.06);border:1px solid rgba(0,212,106,.15);border-radius:12px;padding:14px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <div style="font-size:11px;color:var(--gr)">فودافون كاش / إنستا باي</div>
+              <div style="background:rgba(0,212,106,.15);color:var(--gn);font-size:10px;padding:2px 8px;border-radius:6px;font-weight:700">انسخ الرقم</div>
+            </div>
+            <div style="font-size:22px;font-weight:900;color:var(--w);letter-spacing:2px;text-align:center;padding:8px 0;background:rgba(0,0,0,.2);border-radius:8px;cursor:pointer" onclick="copyNum()" id="transfer_num">
+              01119911186
+            </div>
+            <div id="copy_msg" style="text-align:center;font-size:11px;color:var(--gn);margin-top:6px;display:none">✓ تم النسخ!</div>
+          </div>
+
+          <!-- Steps -->
+          <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gr2)">
+              <div style="width:20px;height:20px;border-radius:50%;background:rgba(30,111,255,.2);color:var(--blu2);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+              حول المبلغ على الرقم أعلاه
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gr2)">
+              <div style="width:20px;height:20px;border-radius:50%;background:rgba(30,111,255,.2);color:var(--blu2);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+              خد سكرين شوت للإيصال
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gr2)">
+              <div style="width:20px;height:20px;border-radius:50%;background:rgba(30,111,255,.2);color:var(--blu2);font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+              ابعت الإيصال على الواتساب وهنشحن فوراً
+            </div>
+          </div>
+
+          <a href="https://wa.me/447853501734" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-family:Cairo,sans-serif;font-size:14px;font-weight:900;border-radius:12px;padding:13px;text-decoration:none">
+            <span style="font-size:18px">💬</span>
+            ابعت إيصال التحويل على الواتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- Savings banner - shows when transfer selected -->
+      <div id="savings_banner" style="display:none;margin-top:10px;background:linear-gradient(135deg,rgba(0,212,106,.12),rgba(0,212,106,.06));border:1px solid rgba(0,212,106,.25);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px">
+        <div style="font-size:20px">🎉</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--gn)">وفّرت 85 ج.م على الشحن!</div>
+          <div style="font-size:11px;color:var(--gr)">بدل 535 ج.م — بتدفع <span id="saving_price" style="color:var(--w);font-weight:700">450 ج.م</span> بس</div>
+        </div>
+      </div>
+    </div>
+
+<div id="orderForm">
       <div class="fg"><label class="fl">الاسم الكامل *</label><input type="text" id="fn" class="fin" placeholder="اكتب اسمك" autocomplete="name"></div>
       <div class="fg"><label class="fl">رقم الموبايل *</label><input type="tel" id="fp" class="fin" placeholder="01xxxxxxxxx" style="direction:ltr;text-align:right" autocomplete="tel"></div>
       <div class="fg"><label class="fl">رقم بديل (اختياري) 📞</label><input type="tel" id="fp2" class="fin" placeholder="01xxxxxxxxx — لضمان التواصل" style="direction:ltr;text-align:right"></div>
@@ -681,7 +812,68 @@ const IMGS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAcFBQYFBAcG
 let selPrice=450,selQty=1;
 
 function sw(t,i){document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('mainImg').src=IMGS[i];}
-function selQ(el,q,p){document.querySelectorAll('.qty-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');selQty=q;selPrice=p;el.querySelector('.qn').style.cssText='background:var(--blu);border-color:var(--blu);color:#fff';document.getElementById('fq').value=q;}
+// Payment method
+let payMethod='cod';
+
+function selectPay(method){
+  payMethod=method;
+  const codEl=document.getElementById('pay_cod');
+  const transEl=document.getElementById('pay_transfer');
+  const transDetails=document.getElementById('transfer_details');
+  const transRadio=document.getElementById('transfer_radio');
+  const savingsBanner=document.getElementById('savings_banner');
+  if(!codEl||!transEl)return;
+  if(method==='cod'){
+    codEl.style.border='2px solid var(--blu)';
+    codEl.style.background='rgba(30,111,255,.06)';
+    transEl.style.border='1.5px solid rgba(255,255,255,.08)';
+    transEl.style.background='var(--dk3)';
+    if(transDetails)transDetails.style.display='none';
+    if(savingsBanner)savingsBanner.style.display='none';
+    if(transRadio){transRadio.innerHTML='';transRadio.style.border='2px solid var(--gr)';transRadio.style.background='transparent';}
+  } else {
+    transEl.style.border='2px solid var(--gn)';
+    transEl.style.background='rgba(0,212,106,.05)';
+    codEl.style.border='1.5px solid rgba(255,255,255,.08)';
+    codEl.style.background='var(--dk3)';
+    if(transDetails)transDetails.style.display='block';
+    if(savingsBanner)savingsBanner.style.display='flex';
+    if(transRadio){transRadio.innerHTML='<div style="width:8px;height:8px;background:var(--gn);border-radius:50%"></div>';transRadio.style.border='2px solid var(--gn)';transRadio.style.background='rgba(0,212,106,.15)';}
+  }
+  updatePayPrices();
+}
+
+function copyNum(){
+  navigator.clipboard.writeText('01119911186').then(()=>{
+    const msg=document.getElementById('copy_msg');
+    if(msg){msg.style.display='block';setTimeout(()=>msg.style.display='none',2000);}
+  }).catch(()=>{});
+}
+
+function updatePayPrices(){
+  const shipping=85;
+  const total=selPrice+shipping;
+  // COD elements
+  const codPriceEl=document.getElementById('cod_price');
+  const codProductEl=document.getElementById('cod_product_price');
+  if(codPriceEl)codPriceEl.textContent=total+' ج.م';
+  if(codProductEl)codProductEl.textContent=selPrice+' ج.م';
+  // Transfer elements
+  const transPriceEl=document.getElementById('transfer_price');
+  const transTotalEl=document.getElementById('transfer_total');
+  const savingPriceEl=document.getElementById('saving_price');
+  if(transPriceEl)transPriceEl.textContent=selPrice+' ج.م';
+  if(transTotalEl)transTotalEl.textContent=selPrice+' ج.م';
+  if(savingPriceEl)savingPriceEl.textContent=selPrice+' ج.م';
+}
+
+function selQ(el,q,p){
+  document.querySelectorAll('.qty-opt').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel');selQty=q;selPrice=p;
+  el.querySelector('.qn').style.cssText='background:var(--blu);border-color:var(--blu);color:#fff';
+  document.getElementById('fq').value=q;
+  updatePayPrices();
+}
 function goOrder(){document.getElementById('order').scrollIntoView({behavior:'smooth'});}
 window.addEventListener('scroll',()=>{document.getElementById('sticky').classList.toggle('vis',window.scrollY>document.querySelector('.hero').offsetHeight);},{passive:true});
 setInterval(()=>{const el=document.getElementById('vc');el.textContent=Math.max(25,Math.min(65,parseInt(el.textContent)+(Math.random()>.5?1:-1)));;},5000);
@@ -694,15 +886,47 @@ let lastY=0;window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<la
 function closeExit(){document.getElementById('exitPopup').classList.remove('show');goOrder();}
 function tF(btn){btn.closest('.faq').classList.toggle('open');}
 function sub(){
-  const n=document.getElementById('fn').value.trim(),p=document.getElementById('fp').value.trim(),a=document.getElementById('fa').value;
+  const n=document.getElementById('fn').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  const a=document.getElementById('fa').value;
   if(!n||!p||!a){alert('من فضلك أكمل البيانات المطلوبة!');return;}
-  if(typeof fbq!=='undefined'){fbq('track','Lead',{content_name:'Headache Cap Egypt',value:selPrice,currency:'EGP'});fbq('track','AddToCart',{value:selPrice,currency:'EGP'});}
-  const p2=document.getElementById('fp2')?document.getElementById('fp2').value.trim():'';
-  const ft=document.getElementById('ft')?document.getElementById('ft').value:'any';
-  const fnote2=document.getElementById('fnote2')?document.getElementById('fnote2').value.trim():'';
-  fetch('https://script.google.com/macros/s/AKfycbwwvJJWm4IeULo8EZrYh5j7ByyBosl_FjgboRBKwYzgrH5H_Bs_H7tIC-yjECiyQ-zk/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({timestamp:new Date().toLocaleString('ar-EG'),name:n,phone:p,phone2:p2,gov:a,address:document.getElementById('fad').value,delivery_time:ft,note:fnote2,qty:document.getElementById('fq').value,price:selPrice+'EGP',product:'كاب الصداع الطبي'})});
-  const params=new URLSearchParams({name:n,phone:p,gov:a,price:selPrice,product:'كاب الصداع'});
-  setTimeout(()=>{window.location.href='upsell.html?'+params.toString();},500);
+  const p2=(document.getElementById('fp2')||{value:''}).value.trim();
+  const ft=(document.getElementById('ft')||{value:'any'}).value;
+  const fnote2=(document.getElementById('fnote2')||{value:''}).value.trim();
+  const shipping=(typeof payMethod!=='undefined'&&payMethod==='transfer')?0:85;
+  const finalPrice=selPrice+shipping;
+  const payLabel=(typeof payMethod!=='undefined'&&payMethod==='transfer')?'تحويل بنكي (شحن مجاني)':'كاش عند الاستلام (شحن 85 ج.م)';
+  if(typeof fbq!=='undefined'){
+    fbq('track','Lead',{content_name:'Headache Cap Egypt',value:finalPrice,currency:'EGP'});
+    fbq('track','AddToCart',{value:finalPrice,currency:'EGP'});
+  }
+  fetch('https://script.google.com/macros/s/AKfycbwwvJJWm4IeULo8EZrYh5j7ByyBosl_FjgboRBKwYzgrH5H_Bs_H7tIC-yjECiyQ-zk/exec',{
+    method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      timestamp:new Date().toLocaleString('ar-EG'),
+      name:n,phone:p,phone2:p2,gov:a,
+      address:(document.getElementById('fad')||{value:''}).value,
+      delivery_time:ft,note:fnote2,
+      qty:(document.getElementById('fq')||{value:'1'}).value,
+      price:finalPrice+' EGP',payment:payLabel,
+      product:'كاب الصداع الطبي'
+    })
+  });
+  if(typeof payMethod!=='undefined'&&payMethod==='transfer'){
+    document.getElementById('orderForm').style.display='none';
+    document.getElementById('succ').style.display='block';
+    document.getElementById('succ').innerHTML=`<div style="font-size:52px;margin-bottom:12px">🎉</div><div style="font-size:20px;font-weight:900;color:var(--gn);margin-bottom:10px">تم استلام طلبك!</div><div style="font-size:13px;color:var(--gr);line-height:1.9;margin-bottom:20px">الخطوة الأخيرة — حول <strong style="color:var(--w)">${finalPrice} ج.م</strong> على<br>فودافون كاش: <strong style="color:var(--blu2);font-size:18px">01119911186</strong><br><span style="font-size:11px">وابعت صورة الإيصال على الواتساب</span></div><a href="https://wa.me/447853501734?text=${encodeURIComponent('طلب جديد
+الاسم: '+n+'
+الموبايل: '+p+'
+المحافظة: '+a+'
+المبلغ: '+finalPrice+' ج.م
+طريقة الدفع: تحويل بنكي
+برجاء إرسال إيصال التحويل')}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-family:Cairo,sans-serif;font-size:16px;font-weight:900;border-radius:14px;padding:16px;text-decoration:none;max-width:400px;margin:0 auto">💬 ابعت إيصال التحويل على الواتساب</a>`;
+    document.getElementById('succ').scrollIntoView({behavior:'smooth'});
+  } else {
+    const params=new URLSearchParams({name:n,phone:p,gov:a,price:finalPrice,product:'كاب الصداع'});
+    setTimeout(()=>{window.location.href='upsell.html?'+params.toString();},500);
+  }
 }
 </script>
 </body>
